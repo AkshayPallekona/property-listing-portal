@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - Property Portal</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <main class="container">
+    <h1>Search Properties</h1>
+    <form id="search-form" style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <input name="q" placeholder="Keywords" aria-label="Search keywords">
+      <input name="city" placeholder="City" aria-label="City">
+      <select name="purpose" aria-label="Purpose">
+        <option value="">Any purpose</option>
+        <option value="rent">Rent</option>
+        <option value="sale">Sale</option>
+      </select>
+      <button type="submit" class="btn">Search</button>
+    </form>
+    <div id="results" class="grid"></div>
+    <div id="pagination"></div>
+  </main>
+  <div id="footer"></div>
+  <script type="module" src="/assets/js/layout.js"></script>
+  <script type="module" src="/assets/js/search.js"></script>
+</body>
+</html>

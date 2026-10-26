@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Property Portal</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <main class="container" style="max-width:450px;">
+    <h1>Create Account</h1>
+    <form id="reg-form">
+      <label>Name <input name="name" required minlength="2"></label><br><br>
+      <label>Email <input type="email" name="email" required></label><br><br>
+      <label>Password <input type="password" name="password" required minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}" title="At least 8 chars, upper, lower, digit"></label><br><br>
+      <label>I am a 
+        <select name="role">
+          <option value="seeker">Seeker (looking for property)</option>
+          <option value="owner">Owner / Agent</option>
+        </select>
+      </label><br><br>
+      <button type="submit" class="btn">Register</button>
+    </form>
+    <p>Already have an account? <a href="/pages/login.html">Login</a></p>
+  </main>
+  <div id="footer"></div>
+  <script type="module" src="/assets/js/layout.js"></script>
+  <script type="module">
+    import { api } from '/assets/js/api.js';
+    import { showToast } from '/assets/js/ui.js';
+    document.getElementById('reg-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target;
+      try {
+        await api('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({
+            name: f.name.value,
+            email: f.email.value,
+            password: f.password.value,
+            role: f.role.value
+          })
+        });
+        showToast('Account created! Welcome.');
+        location.href = '/pages/index.html';
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>
